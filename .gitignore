@@ -1,0 +1,11 @@
+# python
+.virtualenv
+.venv
+__pycache__
+.pytest_cache
+
+# log
+geckodriver.log
+
+# ide
+.vscode
