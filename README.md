@@ -11,6 +11,8 @@ You will need to have Python3 installed for this workshop. More info on that her
 
 ## Setup
 
+Download or clone this repository locally, then run the following commands:
+
 Linux/MacOS:
 
 ```bash
@@ -63,8 +65,34 @@ We will be using AltWalker and GraphWalker to implement and run models that we c
 
 For this you will need to:
 
-- Install [Java11](https://openjdk.java.net/)
-- Install and configure GraphWalker CLI - instructions are available [here](https://github.com/altwalker/graphwalker-installer)
+- Install [Java](https://jdk.java.net/19/)
+- Install and configure GraphWalker CLI using these commands:
+
+on Mac/Linux
+
+```
+wget https://github.com/GraphWalker/graphwalker-project/releases/download/4.3.2/graphwalker-cli-4.3.2.jar && \
+mkdir -p ~/graphwalker && \
+mv graphwalker-cli-4.3.2.jar ~/graphwalker/ && \
+echo -e '#!/bin/bash\njava -jar ~/graphwalker/graphwalker-cli-4.3.2.jar "$@"' > ~/graphwalker/graphwalker-cli.sh && \
+chmod +x ~/graphwalker/graphwalker-cli.sh && \
+ln -s ~/graphwalker/graphwalker-cli.sh /usr/local/bin/gw
+```
+
+and on Windows:
+
+```
+setx PATH "%PATH%;C:\graphwalker" & :: Adds graphwalker to current user PATH
+cd C:\
+mkdir graphwalker
+cd graphwalker
+powershell -Command "[Net.ServicePointManager]::SecurityProtocol = 'tls12'; Invoke-WebRequest -Uri 'https://github.com/GraphWalker/graphwalker-project/releases/download/4.3.2/graphwalker-cli-4.3.2.jar' -outfile 'graphwalker-cli-4.3.2.jar'" & :: Downloads graphwalker using powershell command Invoke-Request
+@echo off
+@echo @echo off> gw.bat
+@echo java -jar C:\graphwalker\graphwalker-cli-4.3.2.jar %*>> gw.bat
+@echo on
+```
+
 
 To check that you GraphWalker correctly configured, run the following command and check that you get the same version:
 
