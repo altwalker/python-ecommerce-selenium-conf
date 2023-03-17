@@ -37,11 +37,14 @@ class BasePage:
     @property
     def total_items_in_cart(self):
         return int(self.driver.find_element(*self._cart_button_locator).find_element(*self._total_items_in_cart_locator).text)
+    
+    def wait_to_load(self):
+        self.driver.find_element(*self._cart_button_locator)
+        self.driver.find_element(*self._home_button_locator)
+        return self
 
     def wait_for_snipcart(self, timeout=10):
-        self.driver.find_element(*self._cart_holder)
-        from pages.cart import CartPage
-        return CartPage(self.driver)
+        WebDriverWait(self.driver, timeout).until(snipcart_initialized_and_ready())
 
     def wait_for_cart_reload(self, timeout=10):
         WebDriverWait(self.driver, timeout).until(
@@ -54,7 +57,7 @@ class BasePage:
         self.wait_for_snipcart()
         self.driver.find_element(*self._cart_button_locator).click()
         from pages.cart import CartPage
-        return CartPage(self.driver)
+        return CartPage(self.driver).wait_for_snipcart()
 
     def click_close_cart_button(self):
         self.wait_for_element_to_be_clickable(self._cart_close_button_locator)

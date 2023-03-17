@@ -17,8 +17,15 @@ class ProductPage(BasePage):
     @property
     def product_name(self):
         return self.driver.find_element(*self._product_name_locator).text
-
+    
+    def wait_to_load(self):
+        super(ProductPage, self).wait_to_load()
+        self.driver.find_element(*self._product_details_locator)
+        self.driver.find_element(*self._product_name_locator)
+        self.driver.find_element(*self._add_to_cart_button_locator)
+        return self
+    
     def click_add_to_cart(self):
         self.driver.find_element(*self._add_to_cart_button_locator).click()
         from pages.cart import CartPage
-        return CartPage(self.driver).wait_for_snipcart()
+        return CartPage(self.driver).wait_to_load()

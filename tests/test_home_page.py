@@ -22,4 +22,8 @@ class TestHomePage(BaseTest):
         self.home_page.click_close_cart_button()
         assert self.home_page.total_items_in_cart > 0, "Product should be in cart."
         
+    def test_cart_can_be_opened_from_home_page(self):
+        self.home_page.click_cart_button()
+        assert self.home_page.is_cart_open == True, "Cart should be open."
+        
     

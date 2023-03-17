@@ -34,6 +34,9 @@ class CartPage(BasePage):
     def is_order_confirmation_present(self):
         return self.is_element_present(*self._order_confirmation_place_order_button_locator)
 
+    def wait_to_load(self):
+        self.driver.find_element(*self._cart_holder)
+
     def click_content_cart_next_step_button(self):
         self.wait_for_snipcart()
         self.driver.find_element(*self._content_cart_next_step_button_locator).click()

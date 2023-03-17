@@ -24,6 +24,11 @@ class HomePage(BasePage):
     @property
     def is_displayed(self):
         return self.is_products_list_present
+    
+    def wait_to_load(self):
+        super(HomePage, self).wait_to_load()
+        self.driver.find_element(*self._products_locator)
+        return self
 
     def click_random_product(self):
         product_index = randint(0, self.products_count - 1)
@@ -43,4 +48,4 @@ class HomePage(BasePage):
         product = self.driver.find_elements(*self._products_locator)[product_index]
         product.find_element(*self._add_to_cart_button_locator).click()
         from pages.cart import CartPage
-        return CartPage(self.driver).wait_for_snipcart()
+        return CartPage(self.driver).wait_to_load()
