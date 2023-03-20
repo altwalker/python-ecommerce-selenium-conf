@@ -2,7 +2,7 @@ from tests.base import BaseTest
 from pages.home import HomePage
 from pages.product import ProductPage
 
-class TestHomePage(BaseTest):
+class TestProductPage(BaseTest):
 
     def setup_method(self):
         self.home_page = HomePage(self.driver)

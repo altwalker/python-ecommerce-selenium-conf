@@ -1,5 +1,5 @@
+import time
 from selenium.webdriver.common.by import By
-
 from pages.base import BasePage
 
 
@@ -35,6 +35,7 @@ class CartPage(BasePage):
         return self.is_element_present(*self._order_confirmation_place_order_button_locator)
 
     def wait_to_load(self):
+        time.sleep(0.5)
         self.driver.find_element(*self._cart_holder)
 
     def click_content_cart_next_step_button(self):
