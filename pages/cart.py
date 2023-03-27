@@ -58,7 +58,7 @@ class CartPage(BasePage):
         self.driver.find_element(*self._order_confirmation_place_order_button_locator).click()
         return self
 
-    def fill_in_billing_adress_form(self, name="", city="", email="", street_address1="", postal_code=""):
+    def fill_in_billing_address_form(self, name="", city="", email="", street_address1="", postal_code=""):
         print("Fill Billing Form")
 
         if name != "":
